@@ -47,3 +47,25 @@ export type Session = {
   createdAt: string;
   user: User;
 };
+
+export type Form = {
+  id: number;
+  name: string;
+  description?: string | null;
+  slug: string;
+  workspaceId: number;
+  createdAt: string; // ISO string when coming from API
+  updatedAt: string;
+};
+
+export type FormSubmission = {
+  id: number;
+  formId: number;
+  data: Record<string, any>; // Prisma Json -> flexible object
+  createdAt: string; // ISO string from API
+};
+
+export type FormChartResponse = {
+  labels: string[];
+  data: number[];
+};

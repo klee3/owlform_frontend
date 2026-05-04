@@ -6,6 +6,7 @@ import { useSessionStore } from "@/store/session.store";
 
 import { Avatar, Dropdown, Label } from "@heroui/react";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,7 +40,9 @@ const AppNavbar = () => {
   return (
     <div className="w-full h-14 border-b bg-white flex items-center justify-between px-4">
       {/* Left - App Name */}
-      <div className="font-bold text-lg">Dashboard</div>
+      <div className="font-bold text-lg">
+        <Link href="/dashboard">Dashboard</Link>
+      </div>
 
       {/* Right - Profile Dropdown */}
       <Dropdown>

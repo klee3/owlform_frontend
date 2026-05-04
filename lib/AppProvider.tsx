@@ -2,7 +2,7 @@
 
 import { useSessionStore } from "@/store/session.store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "chart.js/auto";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 
@@ -21,7 +21,7 @@ export default function AppProvider({
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <ToastContainer hideProgressBar={true} />
     </QueryClientProvider>
   );

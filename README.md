@@ -1,36 +1,179 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OwlForm Frontend
 
-## Getting Started
+A modern, beautiful form endpoint service that allows you to collect form submissions without needing to build a backend. Built with Next.js, React, and Tailwind CSS.
 
-First, run the development server:
+## What is OwlForm?
+
+OwlForm is a service that provides instant form endpoints for your websites. Instead of building a backend to handle form submissions, you simply:
+
+1. **Create a form** in your OwlForm dashboard
+2. **Get a unique endpoint URL** (e.g., `https://api.owlform.com/form/abc123`)
+3. **Embed it anywhere** - Next.js, React, Vue, WordPress, Webflow, or plain HTML
+
+```html
+<form action="https://api.owlform.com/form/abc123" method="POST">
+  <input name="name" placeholder="Full name" />
+  <input name="email" placeholder="Work email" />
+  <textarea name="message" rows="4"></textarea>
+  <button type="submit">Send message</button>
+</form>
+```
+
+That's it! No JavaScript required, no backend to maintain.
+
+## Features
+
+- ⚡ **60-second setup** - Register, grab your endpoint, paste into your form
+- 📊 **Real-time dashboard** - Watch submissions appear live with search, filter, and export
+- 🔌 **Framework agnostic** - Works with any HTML form, zero JavaScript required
+- 🔀 **Custom redirects** - Send users to a thank-you page after submit
+
+## Tech Stack
+
+- **Framework**: Next.js 16.2.4 (App Router)
+- **Language**: TypeScript
+- **UI Library**: HeroUI (@heroui/react)
+- **Styling**: Tailwind CSS 4
+- **State Management**: Zustand
+- **Data Fetching**: TanStack React Query
+- **Charts**: Chart.js + react-chartjs-2
+- **Animations**: Framer Motion
+- **HTTP Client**: Axios
+- **Package Manager**: pnpm
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** 18.x or later
+- **pnpm** 8.x or later (recommended) - or npm/yarn
+- **OwlForm Backend API** running (see below)
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/klee3/owlform_frontend.git
+cd owlform_frontend
+```
+
+### 2. Install Dependencies
+
+Using pnpm (recommended):
+
+```bash
+pnpm install
+```
+
+Or using npm:
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Copy the example environment file and configure it:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local` and set the API base URL:
+
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+```
+
+> **Note**: The frontend expects the OwlForm backend API to be running. If you're running the backend locally, it should be on `http://localhost:8080`. Update this URL if your backend is running elsewhere.
+
+### 4. Run the Development Server
+
+```bash
+pnpm dev
+```
+
+Or with npm:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+owloform_frontend/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Landing page
+│   ├── login/             # Login page
+│   ├── register/          # Registration page
+│   ├── dashboard/         # User dashboard
+│   │   └── [workspaceSlug]/
+│   │       └── form/
+│   │           └── [formSlug]/  # Form details & submissions
+│   └── form-submitted/    # Thank you page after form submission
+├── components/            # Reusable React components
+│   ├── AppNavbar.tsx      # Main navigation bar
+│   ├── AuthNavbar.tsx     # Auth pages navigation
+│   ├── CreateFormDialog.tsx  # Form creation modal
+│   ├── FormChart.tsx      # Form statistics chart
+│   ├── FormHowToDrawer.tsx   # Integration instructions
+│   └── FormSeciont.tsx    # Form section component
+├── hooks/                 # Custom React hooks
+│   └── api/              # API hooks (useFormStats, useDeleteForm, etc.)
+├── lib/                   # Utility functions and config
+│   ├── AppProvider.tsx    # App-wide context provider
+│   ├── constant.ts       # Constants (API_BASE_URL)
+│   └── api/              # API client configuration
+├── store/                 # Zustand state stores
+│   ├── session.store.ts   # User session state
+│   └── workspace.store.ts # Workspace state
+└── public/                # Static assets
+```
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command      | Description                      |
+| ------------ | -------------------------------- |
+| `pnpm dev`   | Start the development server     |
+| `pnpm build` | Build the production application |
+| `pnpm start` | Start the production server      |
+| `pnpm lint`  | Run ESLint to check for errors   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+OwlForm requires a backend API to function. The frontend is designed to work with the OwlForm backend service.
 
-## Deploy on Vercel
+For the backend, you'll need to set up the OwlForm backend repository. The backend handles:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- User authentication
+- Form CRUD operations
+- Form submission storage
+- Webhook dispatching
+- Email notifications
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import the project on Vercel
+3. Configure the `NEXT_PUBLIC_API_BASE_URL` environment variable
+4. Deploy
+
+### Other Platforms
+
+The app can be deployed to any platform that supports Next.js:
+
+- Netlify
+- Railway
+- Render
+- AWS Amplify
+- Docker container
+
+## License
+
+This project is private and for personal use.

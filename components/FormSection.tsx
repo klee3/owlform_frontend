@@ -123,10 +123,11 @@ function FormCard({
   const initials = form.name.slice(0, 2).toUpperCase();
 
   // TODO: Get Submission
-  const submissionsLabel =
-    typeof form.submissionCount === "number"
-      ? `${form.submissionCount.toLocaleString()} submission${form.submissionCount !== 1 ? "s" : ""}`
-      : null;
+  const submissionsLabel = "";
+  // const submissionsLabel =
+  //   typeof form.submissionCount === "number"
+  //     ? `${form.submissionCount.toLocaleString()} submission${form.submissionCount !== 1 ? "s" : ""}`
+  //     : null;
 
   const createdLabel = form.createdAt
     ? new Date(form.createdAt).toLocaleDateString("en-US", {

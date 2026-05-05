@@ -3,16 +3,22 @@
 import { axiosClient } from "@/lib/api/axiosClient";
 import { useSessionStore } from "@/store/session.store";
 import { Spinner } from "@heroui/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-const VerifyEmailPage = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+type Props = {
+  searchParams: {
+    token?: string;
+    tokenId?: string;
+  };
+};
 
-  const token = searchParams.get("token");
-  const tokenId = searchParams.get("tokenId");
+const VerifyEmailPage = ({ searchParams }: Props) => {
+  const router = useRouter();
+
+  const token = searchParams.token;
+  const tokenId = searchParams.tokenId;
 
   useEffect(() => {
     const verify = async () => {

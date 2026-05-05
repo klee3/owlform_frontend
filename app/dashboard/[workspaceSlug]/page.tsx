@@ -1,7 +1,7 @@
 "use client";
 
 import AppNavbar from "@/components/AppNavbar";
-import FormsSection from "@/components/FormSeciont";
+import FormsSection from "@/components/FormSection";
 import { useWorkspaceStore } from "@/store/workspace.store";
 import { motion } from "framer-motion";
 import { useParams } from "next/navigation";

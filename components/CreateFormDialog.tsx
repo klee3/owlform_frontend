@@ -147,13 +147,14 @@ export default function CreateFormDialog({
 
     try {
       setLoading(true);
+
+      console.log(name, description, workspaceSlug);
       await axiosClient.post(
         "/form",
         {
           name: name.trim(),
           description: description.trim(),
           workspaceSlug,
-          slug: derivedSlug,
         },
         { withCredentials: true },
       );
@@ -162,6 +163,7 @@ export default function CreateFormDialog({
       handleClose();
       onCreated?.();
     } catch (err: any) {
+      console.log(err.code);
       toast.error(
         err?.response?.data?.message ?? err.message ?? "Something went wrong",
       );
